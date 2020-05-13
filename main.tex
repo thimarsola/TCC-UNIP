@@ -1,0 +1,591 @@
+\documentclass[
+	% -- opções da classe memoir --
+	12pt,				% tamanho da fonte
+	openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+	oneside,			% para impressão apenas em frente. Oposto a twoside
+	a4paper,			% tamanho do papel. 
+	% -- opções da classe abntex2 --
+	chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+	%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	brazil				% o último idioma é o principal do documento
+	]{abntex2}
+	
+
+\usepackage{silence}
+\WarningFilter{latex}{You have requested package}
+
+\pdfstringdefDisableCommands{\let\uppercase\relax}
+
+\usepackage{longtable}
+
+\usepackage[final]{pdfpages} % Incluir pdf
+
+
+\usepackage{float} %para imagens
+% Para mais formas de enumerar itens
+\renewcommand{\labelenumi}{\theenumi}
+
+% Para indicar copyright e registered
+\usepackage{textcomp}
+
+% Para imagens e legendas
+\usepackage[footnotesize]{caption}
+\usepackage{subcaption}
+
+% Para editar forma das equações
+\usepackage{amsmath}
+
+\usepackage{siunitx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\DeclareMathOperator{\sinc}{sinc}
+\DeclareMathOperator{\vecE}{vec}
+\newtheorem{mydef}{Defini{\c{c}}\~ao}
+
+
+% ---
+% Pacotes básicos 
+% ---	
+\usepackage{helvet} % Usa o equivalente ARIAL
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{lastpage}			% Usado pela Ficha catalográfica
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 			% para melhorias de justificação
+% ---
+		
+% ---
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+\usepackage{lipsum}				% para geração de dummy text
+% ---
+
+
+% ---
+% Pacotes de citações
+% ---
+
+%\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+
+
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,calc}
+\usepackage{tikz-3dplot}
+
+
+% --- 
+% CONFIGURAÇÕES DE PACOTES
+% --- 
+
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+
+%\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+
+
+% Texto padrão antes do número das páginas
+
+
+%\renewcommand{\backref}{}
+% Define os textos da citação
+%\renewcommand*{\backrefalt}[4]{
+%	\ifcase #1 %
+%		Nenhuma citação no texto.%
+%	\or
+%		Citado na página #2.%
+%	\else
+%		Citado #1 vezes nas páginas #2.%
+%	\fi}%
+% ---
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+
+
+\autor{
+	\uppercase{
+		Brenon Costa Ortega\\
+		Darlan Gomes de Oliveira Filho\\
+		Kauê Brescancini Martin\\
+		Renan Hideki hirashiki\\
+		Renan Pereira da Silva\\
+		Thiago Dias de Jesus Marsola Corrêa
+	}
+}
+\titulo{COLOQUE SEU TITULO}
+\local{São Paulo}
+\data{2020}
+\orientador{Prof. MsC. Wanys Arnaldo Antonio Rocha}
+\coorientador{Prof. MsC. Romeu Fontana Júnior}
+\coorientador{Prof. MsC. Ademir Antonio dos Santos}
+\preambulo{Trabalho de Conclusão de Curso apresentado ao curso de Bacharelado em Engenharia de Controle e Automação da Universidade Paulista -- Unip, como pré-requisito para obtenção do grau de bacharel em Engenharia de Controle e Automação.}
+% ---
+
+\usepackage{listings}
+\renewcommand\lstlistlistingname{Lista de códigos}
+\renewcommand\lstlistingname{Código}
+\newlistof{lstlistoflistings}{lol}{\lstlistlistingname}
+
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+
+% configuracoes do listings
+
+\lstset{language=Matlab,%
+    basicstyle=\tiny,
+    breaklines=true,%
+    morekeywords={matlab2tikz},
+    keywordstyle=\color{blue},%
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},%
+    stringstyle=\color{mylilas},
+    commentstyle=\color{mygreen},%
+    showstringspaces=false,%without this there will be a symbol in the places where there is a space
+    numbers=left,%
+    numberstyle={\tiny \color{black}},% size of the numbers
+    numbersep=9pt, % this defines how far the numbers are from the text
+    emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
+    %emph=[2]{word1,word2}, emphstyle=[2]{style}, 
+    numberbychapter=false,
+    linewidth=\textwidth,
+    xleftmargin=0.05\textwidth,
+    xrightmargin=0.05\textwidth,
+    frame=single,
+}
+
+
+% %% TESTE PARA LISTA DE QUADROS
+% % Novo list of (listings) para QUADROS
+
+% \newcommand{\quadroname}{Quadro}
+% \newcommand{\listofquadrosname}{Lista de quadros}
+
+% \newfloat[chapter]{quadro}{loq}{\quadroname}
+% \newlistof{listofquadros}{loq}{\listofquadrosname}
+% \newlistentry{quadro}{loq}{0}
+
+% % configurações para atender às regras da ABNT
+% \setfloatadjustment{quadro}{\centering}
+% \counterwithout{quadro}{chapter}
+% \renewcommand{\cftquadroname}{\quadroname\space} 
+% \renewcommand*{\cftquadroaftersnum}{\hfill--\hfill}
+
+% % Configuração de posicionamento padrão:
+% \setfloatlocations{quadro}{hbtp}
+
+
+
+%\listingsfontinline
+%\def\listingsfont{\ttfamily}
+
+
+% ---
+% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{0,0,0}
+
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+% --- 
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+% tamanho da assinatura
+\setlength{\ABNTEXsignwidth}{10cm}
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+
+% ----
+% Alterando a lista de Códigos
+% ----
+
+\AtBeginDocument{% the counter is defined later
+	\counterwithout{lstlisting}{chapter}%
+}
+\makeatletter
+\renewcommand{\l@lstlisting}[2]{%
+	\@dottedtocline{1}{0em}{1.5em}{\lstlistingname\ #1}{#2}%
+}
+\makeatother
+
+
+
+
+
+
+% ----
+% Início do documento
+% ----
+%\numberwithin{figure}{chapter} %numeração com o capitulo
+%\numberwithin{table}{chapter}%numeração com o capitulo
+\begin{document}
+
+% Seleciona o idioma do documento (conforme pacotes do babel)
+%\selectlanguage{english}
+\selectlanguage{brazil}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+% \pretextual
+
+% ---
+% Capa
+% ---
+\imprimircapa
+% ---
+
+% ---
+% Folha de rosto
+% (o * indica que haverá a ficha bibliográfica)
+% ---
+\imprimirfolhaderosto
+% ---
+
+% ---
+% Inserir a ficha bibliografica
+% ---
+
+% Isto é um exemplo de Ficha Catalográfica, ou ``Dados internacionais de
+% catalogação-na-publicação''. Você pode utilizar este modelo como referência. 
+% Porém, provavelmente a biblioteca da sua universidade lhe fornecerá um PDF
+% com a ficha catalográfica definitiva após a defesa do trabalho. Quando estiver
+% com o documento, salve-o como PDF no diretório do seu projeto e substitua todo
+% o conteúdo de implementação deste arquivo pelo comando abaixo:
+%
+
+
+
+
+
+\begin{fichacatalografica}
+ 	\sffamily
+ 	\vspace*{\fill}					% Posição vertical
+ 	\begin{center}					% Minipage Centralizado
+ 	\fbox{\begin{minipage}[c][8cm]{13.5cm}		% Largura
+ 	\small
+ 	\imprimirautor
+ 	%Sobrenome, Nome do autor
+
+  	\hspace{0.5cm} \imprimirtitulo  / \imprimirautor. --
+  	\imprimirlocal, \imprimirdata-
+
+  	\hspace{0.5cm} \pageref{LastPage} p. : il. (algumas color.) ; 30 cm.\\
+
+  	\hspace{0.5cm} \imprimirorientadorRotulo~\imprimirorientador\\
+	
+  	\hspace{0.5cm}
+  	\parbox[t]{\textwidth}{\imprimirtipotrabalho~--~\imprimirinstituicao,
+  	\imprimirdata.}\\
+	
+  	\hspace{0.5cm}
+  		1. Média Tensão.
+  		2. \textit{Power Line Communication}
+  		2. Simulação.
+  		I. Prof. Dr. Omar Alexander Chura Vilcanqui.
+  		II. Universidade Federal do Acre.
+  		III. Centro de Ciências Exatas e Tecnológicas.
+  		IV. Envio de Informação pela rede elétrica: estudo de caso do alimentador da Universidade Federal do Acre.		
+  	\end{minipage}}
+  	\end{center}
+\end{fichacatalografica}
+% ---
+
+
+% ---
+% Inserir folha de aprovação
+% ---
+
+% Isto é um exemplo de Folha de aprovação, elemento obrigatório da NBR
+% 14724/2011 (seção 4.2.1.3). Você pode utilizar este modelo até a aprovação
+% do trabalho. Após isso, substitua todo o conteúdo deste arquivo por uma
+% imagem da página assinada pela banca com o comando abaixo:
+%
+% \includepdf{folhadeaprovacao_final.pdf}
+%
+\begin{folhadeaprovacao}
+
+  \begin{center}
+    {\ABNTEXchapterfont\bfseries\large COMISSÃO JULGADORA}
+
+    \vspace*{\fill}\vspace*{\fill}
+    \begin{center}
+      {\ABNTEXchapterfont\bfseries\large Trabalho de Conclusão de Curso}
+    \end{center}
+    \vspace*{\fill}      
+    \vspace*{\fill}
+   \end{center}
+        
+   \noindent Autores:\\ \imprimirautor\\
+   \\Data da Defesa: 15/07/2019\\
+   Título do Trabalho: \imprimirtitulo
+   
+   \vspace*{\fill}      
+   \vspace*{\fill}
+
+   \assinatura{\textbf{\imprimirorientador} \\ Orientador -- CCET/UNIP} 
+   \assinatura{\textbf{Prof. MsC. Romeu Fontana Júnior} \\ Co-orientador -- CCET/UNIP}
+   \assinatura{\textbf{Prof. MsC. Ademir Antonio dos Santos} \\ Co-orientador CCET/UNIP}
+     
+   \vspace*{\fill}      
+   \vspace*{\fill}  
+     
+\end{folhadeaprovacao}
+% ---
+
+
+% Agradecimentos
+% ---
+\begin{agradecimentos}
+Escrever aqui os agradecimentos....
+\end{agradecimentos}
+% ---
+
+% ---
+% Epígrafe
+% ---
+\begin{epigrafe}
+    \vspace*{\fill}
+		\begin{flushright}
+			\textit{''A ciência é uma grande montanha de açúcar; dessa montanha só conseguimos retirar 			insignificantes pedacinhos''\\
+			(Malba Tahan)}
+	\end{flushright}
+\end{epigrafe}
+% ---
+
+% ---
+% RESUMOS
+% ---
+
+% resumo em português
+\setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
+\begin{resumo}
+
+ \textbf{Palavras-chave}: Modelagem matemática, controlador em avanço de fase, controle preditivo generalizado, conversor buck.
+\end{resumo}
+
+% resumo em inglês
+\begin{resumo}[Abstract]
+ \begin{otherlanguage*}{english}
+
+   \vspace{\onelineskip}
+ 
+   \noindent 
+   \textbf{Keywords}: Mathematical modeling, phase advance controller, generalized predictive control, buck converter.
+ \end{otherlanguage*}
+\end{resumo}
+
+% ---
+% inserir lista de ilustrações
+% ---
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de tabelas
+% ---
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de códigos
+% ---
+
+\pdfbookmark[0]{\lstlistlistingname}{lol}
+\lstlistoflistings*
+\cleardoublepage
+% ---
+
+% % ---
+% % inserir lista de quadros
+% % ---
+% \pdfbookmark[0]{\listofquadrosname}{loq}
+% \listofquadros*
+% \cleardoublepage
+% % ---
+
+% ---
+% inserir lista de abreviaturas e siglas
+% ---
+%\begin{siglas}
+%\end{siglas}
+
+% ---
+% inserir lista de símbolos
+% ---
+%\begin{simbolos}
+%  \item[$v_k$] Tensão instantânea no condutor k.
+%  \item[$V_k$]
+%\end{simbolos}
+% ---
+
+% ---
+% inserir o sumario
+% ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+ \cleardoublepage
+% ---
+
+
+% ----------------------------------------------------------
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+% ----------------------------------------------------------
+\textual
+
+% ----------------------------------------------------------
+% Introdução
+% ----------------------------------------------------------
+\include{1.Introducao}
+% ---
+
+% ----------------------------------------------------------
+% Cadeira de Rodas
+% ----------------------------------------------------------
+\include{2.CadeiraRodas}
+% ---
+
+% ----------------------------------------------------------
+% Projeto de Engenharia
+% ----------------------------------------------------------
+\include{3.ProjetoEngenharia}
+% ---
+
+% ----------------------------------------------------------
+% Controle
+% ----------------------------------------------------------
+
+% ---
+
+% ----------------------------------------------------------
+% Resultados e Discussões
+% ----------------------------------------------------------
+
+% ---
+
+% ----------------------------------------------------------
+
+
+
+% Finaliza a parte no bookmark do PDF
+% para que se inicie o bookmark na raiz
+% e adiciona espaço de parte no Sumário
+% ----------------------------------------------------------
+\phantompart
+
+% ----------------------------------------------------------
+% Conclusões
+% ----------------------------------------------------------
+\include{8.Conclusoes}
+% ---
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+% ----------------------------------------------------------
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+\bibliography{Referencias}
+
+
+% ----------------------------------------------------------
+% Glossário
+% ----------------------------------------------------------
+%
+% Consulte o manual da classe abntex2 para orientações sobre o glossário.
+%
+%\glossary
+
+% ----------------------------------------------------------
+% Apêndices
+% ----------------------------------------------------------
+
+% ---
+% Inicia os apêndices
+% ---
+% \begin{apendicesenv}
+
+% % Imprime uma página indicando o início dos apêndices
+% \partapendices
+
+% % ----------------------------------------------------------
+% \chapter{Nullam elementum urna vel imperdiet sodales elit ipsum pharetra ligula
+% ac pretium ante justo a nulla curabitur tristique arcu eu metus}
+% % ----------------------------------------------------------
+% \lipsum[55-57]
+
+% \end{apendicesenv}
+% % ---
+
+
+% ----------------------------------------------------------
+% Anexos
+% ----------------------------------------------------------
+
+% ---
+% Inicia os anexos
+% ---
+%\begin{anexosenv}
+%\end{anexosenv}
+
+% %---------------------------------------------------------------------
+% % INDICE REMISSIVO
+% %---------------------------------------------------------------------
+% \phantompart
+% \printindex
+% %---------------------------------------------------------------------
+
+\end{document}
